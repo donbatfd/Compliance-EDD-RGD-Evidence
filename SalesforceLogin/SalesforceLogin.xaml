@@ -1,0 +1,641 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SalesforceLogin" this:SalesforceLogin.in_LoginCredential="LoginCred_Salesforce" this:SalesforceLogin.in_LoginURL="https://tvgbetfair.my.salesforce.com/" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_LoginCredential" Type="InArgument(x:String)" />
+    <x:Property Name="out_LoginStatus" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="in_LoginURL" Type="InArgument(x:String)" />
+    <x:Property Name="io_ChromeBrowser" Type="InOutArgument(ui:Browser)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>2913,4294</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>SalesforceLogin_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="60">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Management.Automation</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>UiPath.Salesforce.Activities.Wizards.Models</x:String>
+      <x:String>UiPath.Salesforce.Models</x:String>
+      <x:String>UiPath.Salesforce.Activities.Models</x:String>
+      <x:String>UiPath.Salesforce.Activities</x:String>
+      <x:String>UiPath.Salesforce.ConnectionService</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.Salesforce.Telemetry</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="56">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce.Activities.Wizards</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce</AssemblyReference>
+      <AssemblyReference>UiPath.Salesforce.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Salesforce Login" sap:VirtualizedContainerService.HintSize="2923,4229" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:Window" Name="Window_Salesforce" />
+      <Variable x:TypeArguments="x:String" Name="Username" />
+      <Variable x:TypeArguments="ss:SecureString" Name="Password" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="Try Logging into Salesforce" sap:VirtualizedContainerService.HintSize="2881,4137" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="2843,3888" sap2010:WorkflowViewState.IdRef="Sequence_26">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Determine use of existing or new browser" sap:VirtualizedContainerService.HintSize="2801,3796" sap2010:WorkflowViewState.IdRef="Sequence_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[in_LoginCredential]" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="2759,22" sap2010:WorkflowViewState.IdRef="GetRobotCredential_2" Password="[Password]" Username="[Username]" />
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="2759,555" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+              <TryCatch.Try>
+                <ui:BrowserScope SearchScope="{x:Null}" Selector="{x:Null}" sap2010:Annotation.AnnotationText="" Browser="[io_ChromeBrowser]" BrowserType="Chrome" DisplayName="Attach Chrome Browser" sap:VirtualizedContainerService.HintSize="434,328" sap2010:WorkflowViewState.IdRef="BrowserScope_3" InformativeScreenshot="11ce90850a7b34ca5923f42bb74ec315" TimeoutMS="10000" UiBrowser="[io_ChromeBrowser]">
+                  <ui:BrowserScope.Body>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Login to application" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:NavigateTo Browser="[io_ChromeBrowser]" DisplayName="Navigate To Login page" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="NavigateTo_3" Url="[in_LoginURL]" />
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:BrowserScope.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:BrowserScope>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="438,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" BrowserType="Chrome" DisplayName="Open Chrome Browser" sap:VirtualizedContainerService.HintSize="510,185" sap2010:WorkflowViewState.IdRef="OpenBrowser_3" UiBrowser="[io_ChromeBrowser]" Url="[in_LoginURL]">
+                      <ui:OpenBrowser.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:OpenBrowser.Body>
+                    </ui:OpenBrowser>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+            <ui:BrowserScope SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Browser="[io_ChromeBrowser]" BrowserType="Chrome" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="2759,3047" sap2010:WorkflowViewState.IdRef="BrowserScope_2" UiBrowser="[io_ChromeBrowser]">
+              <ui:BrowserScope.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                  </ActivityAction.Argument>
+                  <ui:WindowScope SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" ApplicationWindow="[Window_Salesforce]" DisplayName="Attach Salesforce window" sap:VirtualizedContainerService.HintSize="2725,2939" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="f4988c21c10e6e16c80c091ca5ff4ef2" Selector="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='*Salesforce*' /&gt;&#xA;">
+                    <ui:WindowScope.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="2691,2793" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="WindowTitle" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Delay Duration="00:00:10" sap:VirtualizedContainerService.HintSize="2649,22" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                          <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="title" DisplayName="Get title of window" sap:VirtualizedContainerService.HintSize="2649,134" sap2010:WorkflowViewState.IdRef="GetAttribute_1">
+                            <ui:GetAttribute.Result>
+                              <OutArgument x:TypeArguments="x:String">[WindowTitle]</OutArgument>
+                            </ui:GetAttribute.Result>
+                            <ui:GetAttribute.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="57935436-42a3-426b-aaab-765eb19db115" InformativeScreenshot="f1fc4143b46b940df6d4910ac1533124" Selector="&lt;html app='chrome.exe' url='*tvgbetfair*' /&gt;" WaitForReady="COMPLETE">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                              </ui:Target>
+                            </ui:GetAttribute.Target>
+                          </ui:GetAttribute>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="2649,91" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[WindowTitle]" />
+                          <If Condition="[WindowTitle.Contains(&quot;Login&quot;)]" DisplayName="Evaluate whether Salesforce Login is required" sap:VirtualizedContainerService.HintSize="2649,2334" sap2010:WorkflowViewState.IdRef="If_3">
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="839,1563" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="797,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Warn" Message="[&quot;Salesforce login required.&quot;]" />
+                                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click X to clear username field" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                                  <ui:Click.CursorPosition>
+                                    <ui:CursorPosition Position="Center">
+                                      <ui:CursorPosition.OffsetX>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetX>
+                                      <ui:CursorPosition.OffsetY>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetY>
+                                    </ui:CursorPosition>
+                                  </ui:Click.CursorPosition>
+                                  <ui:Click.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5a0a9c6c-9940-4860-b6bc-90bb5d37c446" InformativeScreenshot="23002cb428548da6cc49121eb65da630" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl parentid='clear_link' tag='IMG' /&gt;">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:Click.Target>
+                                </ui:Click>
+                                <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Type Username into text field" sap:VirtualizedContainerService.HintSize="797,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" SimulateType="True" Text="[Username]">
+                                  <ui:TypeInto.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c0ab167d-53d1-4844-893d-81c5b662b227" InformativeScreenshot="78f16c5d905687c8891d6c8c47407204" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl tag='INPUT' type='email' /&gt;">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:TypeInto.Target>
+                                </ui:TypeInto>
+                                <ui:TypeSecureText AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Type Secure password into text field" EmptyField="True" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="TypeSecureText_1" SecureText="[Password]" SimulateType="True">
+                                  <ui:TypeSecureText.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9409150b-ed5e-4904-8b73-46a5436d5f13" InformativeScreenshot="154dd9e2411038191b23247e9d056ee3" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl tag='INPUT' type='password' /&gt;">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:TypeSecureText.Target>
+                                </ui:TypeSecureText>
+                                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Login button" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                                  <ui:Click.CursorPosition>
+                                    <ui:CursorPosition Position="Center">
+                                      <ui:CursorPosition.OffsetX>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetX>
+                                      <ui:CursorPosition.OffsetY>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetY>
+                                    </ui:CursorPosition>
+                                  </ui:Click.CursorPosition>
+                                  <ui:Click.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fa894393-b5bd-410a-82b5-cf179f60b0bd" InformativeScreenshot="efdd75ccf86c2b1cc36e8e1eced8c795" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl tag='INPUT' type='submit' /&gt;">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:Click.Target>
+                                </ui:Click>
+                                <Delay Duration="00:00:10" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="title" DisplayName="Get title of window" sap:VirtualizedContainerService.HintSize="797,134" sap2010:WorkflowViewState.IdRef="GetAttribute_2">
+                                  <ui:GetAttribute.Result>
+                                    <OutArgument x:TypeArguments="x:String">[WindowTitle]</OutArgument>
+                                  </ui:GetAttribute.Result>
+                                  <ui:GetAttribute.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="57935436-42a3-426b-aaab-765eb19db115" InformativeScreenshot="f1fc4143b46b940df6d4910ac1533124" Selector="&lt;html app='chrome.exe' url='*tvgbetfair*' /&gt;" WaitForReady="COMPLETE">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                    </ui:Target>
+                                  </ui:GetAttribute.Target>
+                                </ui:GetAttribute>
+                                <If Condition="[WindowTitle.Contains(&quot;Home&quot;)]" DisplayName="Determine if Login successful" sap:VirtualizedContainerService.HintSize="797,492" sap2010:WorkflowViewState.IdRef="If_4">
+                                  <If.Then>
+                                    <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Salesforce logged in" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Salesforce is logged in.&quot;]" />
+                                      <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Boolean">[out_LoginStatus]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence DisplayName="Salesforce Login page error" sap:VirtualizedContainerService.HintSize="376,345" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Error" Message="[&quot;Salesforce log in status could not be determined.&quot;]" />
+                                      <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Boolean">[out_LoginStatus]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                      <Throw Exception="[new BusinessRuleException(&quot;Salesforce log in could not be completed, check URL and credentials.&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                    </Sequence>
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap:VirtualizedContainerService.HintSize="1765,2187" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If Condition="[WindowTitle.Contains(&quot;Home&quot;)]" sap:VirtualizedContainerService.HintSize="1723,2095" sap2010:WorkflowViewState.IdRef="If_2">
+                                  <If.Then>
+                                    <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Salesforce logged in" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Salesforce is logged in.&quot;]" />
+                                      <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                        <Assign.To>
+                                          <OutArgument x:TypeArguments="x:Boolean">[out_LoginStatus]</OutArgument>
+                                        </Assign.To>
+                                        <Assign.Value>
+                                          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                        </Assign.Value>
+                                      </Assign>
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence DisplayName="Sequence" sap:VirtualizedContainerService.HintSize="1302,1948" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If Condition="[WindowTitle.Contains(&quot;Choose&quot;)]" sap:VirtualizedContainerService.HintSize="1260,1856" sap2010:WorkflowViewState.IdRef="If_6">
+                                        <If.Then>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="839,1709" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click to specify login" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="575130ea-5194-448d-9c17-78acaa28f3fc" InformativeScreenshot="55fd9493d9edcd97e3fd4365f91b516f" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl id='use_new_identity' tag='A' /&gt;">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                  <ui:Target.WaitForReady>
+                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                  </ui:Target.WaitForReady>
+                                                </ui:Target>
+                                              </ui:Click.Target>
+                                            </ui:Click>
+                                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="797,91" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Warn" Message="[&quot;Salesforce login required.&quot;]" />
+                                            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click X to clear username field" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5a0a9c6c-9940-4860-b6bc-90bb5d37c446" InformativeScreenshot="23002cb428548da6cc49121eb65da630" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl parentid='clear_link' tag='IMG' /&gt;">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                  <ui:Target.WaitForReady>
+                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                  </ui:Target.WaitForReady>
+                                                </ui:Target>
+                                              </ui:Click.Target>
+                                            </ui:Click>
+                                            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Type Username into text field" sap:VirtualizedContainerService.HintSize="797,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" SimulateType="True" Text="[Username]">
+                                              <ui:TypeInto.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c0ab167d-53d1-4844-893d-81c5b662b227" InformativeScreenshot="78f16c5d905687c8891d6c8c47407204" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl tag='INPUT' type='email' /&gt;">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                  <ui:Target.WaitForReady>
+                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                  </ui:Target.WaitForReady>
+                                                </ui:Target>
+                                              </ui:TypeInto.Target>
+                                            </ui:TypeInto>
+                                            <ui:TypeSecureText AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Type Secure password into text field" EmptyField="True" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="TypeSecureText_2" SecureText="[Password]" SimulateType="True">
+                                              <ui:TypeSecureText.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9409150b-ed5e-4904-8b73-46a5436d5f13" InformativeScreenshot="154dd9e2411038191b23247e9d056ee3" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl tag='INPUT' type='password' /&gt;">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                  <ui:Target.WaitForReady>
+                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                  </ui:Target.WaitForReady>
+                                                </ui:Target>
+                                              </ui:TypeSecureText.Target>
+                                            </ui:TypeSecureText>
+                                            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Login button" sap:VirtualizedContainerService.HintSize="797,106" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                                              <ui:Click.CursorPosition>
+                                                <ui:CursorPosition Position="Center">
+                                                  <ui:CursorPosition.OffsetX>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetX>
+                                                  <ui:CursorPosition.OffsetY>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:CursorPosition.OffsetY>
+                                                </ui:CursorPosition>
+                                              </ui:Click.CursorPosition>
+                                              <ui:Click.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fa894393-b5bd-410a-82b5-cf179f60b0bd" InformativeScreenshot="efdd75ccf86c2b1cc36e8e1eced8c795" Selector="&lt;html app='chrome.exe' title='*Salesforce*' /&gt;&lt;webctrl tag='INPUT' type='submit' /&gt;">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                  <ui:Target.WaitForReady>
+                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                  </ui:Target.WaitForReady>
+                                                </ui:Target>
+                                              </ui:Click.Target>
+                                            </ui:Click>
+                                            <Delay Duration="00:00:10" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                                            <ui:GetAttribute ContinueOnError="{x:Null}" Attribute="title" DisplayName="Get title of window" sap:VirtualizedContainerService.HintSize="797,134" sap2010:WorkflowViewState.IdRef="GetAttribute_3">
+                                              <ui:GetAttribute.Result>
+                                                <OutArgument x:TypeArguments="x:String">[WindowTitle]</OutArgument>
+                                              </ui:GetAttribute.Result>
+                                              <ui:GetAttribute.Target>
+                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="57935436-42a3-426b-aaab-765eb19db115" InformativeScreenshot="f1fc4143b46b940df6d4910ac1533124" Selector="&lt;html app='chrome.exe' url='*tvgbetfair*' /&gt;" WaitForReady="COMPLETE">
+                                                  <ui:Target.TimeoutMS>
+                                                    <InArgument x:TypeArguments="x:Int32" />
+                                                  </ui:Target.TimeoutMS>
+                                                </ui:Target>
+                                              </ui:GetAttribute.Target>
+                                            </ui:GetAttribute>
+                                            <If Condition="[WindowTitle.Contains(&quot;Home&quot;)]" DisplayName="Determine if Login successful" sap:VirtualizedContainerService.HintSize="797,492" sap2010:WorkflowViewState.IdRef="If_5">
+                                              <If.Then>
+                                                <Sequence sap:VirtualizedContainerService.HintSize="376,283" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:LogMessage DisplayName="Salesforce logged in" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Salesforce is logged in.&quot;]" />
+                                                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                                    <Assign.To>
+                                                      <OutArgument x:TypeArguments="x:Boolean">[out_LoginStatus]</OutArgument>
+                                                    </Assign.To>
+                                                    <Assign.Value>
+                                                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                    </Assign.Value>
+                                                  </Assign>
+                                                </Sequence>
+                                              </If.Then>
+                                              <If.Else>
+                                                <Sequence DisplayName="Salesforce Login page error" sap:VirtualizedContainerService.HintSize="376,345" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Error" Message="[&quot;Salesforce log in status could not be determined.&quot;]" />
+                                                  <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                                    <Assign.To>
+                                                      <OutArgument x:TypeArguments="x:Boolean">[out_LoginStatus]</OutArgument>
+                                                    </Assign.To>
+                                                    <Assign.Value>
+                                                      <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                                    </Assign.Value>
+                                                  </Assign>
+                                                  <Throw Exception="[new BusinessRuleException(&quot;Salesforce log in could not be completed, check URL and credentials.&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                                                </Sequence>
+                                              </If.Else>
+                                            </If>
+                                          </Sequence>
+                                        </If.Then>
+                                        <If.Else>
+                                          <Sequence DisplayName="Salesforce Login Failed" sap:VirtualizedContainerService.HintSize="376,345" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Error" Message="[&quot;Salesforce log in status could not be determined.&quot;]" />
+                                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:Boolean">[out_LoginStatus]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                            <Throw Exception="[new BusinessRuleException(&quot;Salesforce log in could not be completed, check URL and credentials.&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                                          </Sequence>
+                                        </If.Else>
+                                      </If>
+                                    </Sequence>
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:WindowScope.Body>
+                  </ui:WindowScope>
+                </ActivityAction>
+              </ui:BrowserScope.Body>
+            </ui:BrowserScope>
+          </Sequence>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="2847,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="System Exception" sap:VirtualizedContainerService.HintSize="376,354" sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="ui:Image" Name="ExceptionScreenshot" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take Screenshot of System Exception" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="TakeScreenshot_3" Screenshot="[ExceptionScreenshot]">
+                <ui:TakeScreenshot.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="d6dc8f26-b801-4e46-8911-83462fe036b5">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:TakeScreenshot.Target>
+              </ui:TakeScreenshot>
+              <ui:SaveImage DisplayName="Save System Exception Image" FileName="[in_Config(&quot;ExceptionScreenshotFilePath&quot;).ToString+Now.ToString(&quot;MMddyyyy_hhmmss&quot;)+&quot;.png&quot;]" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="SaveImage_3" Image="[ExceptionScreenshot]" />
+              <ui:CloseTab Browser="[io_ChromeBrowser]" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="CloseTab_4" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+        <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="2847,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Business Exception" sap:VirtualizedContainerService.HintSize="376,354" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="ui:Image" Name="ExceptionScreenshot" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take Screenshot of Business Exception" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="TakeScreenshot_2" Screenshot="[ExceptionScreenshot]">
+                <ui:TakeScreenshot.Target>
+                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="d6dc8f26-b801-4e46-8911-83462fe036b5">
+                    <ui:Target.TimeoutMS>
+                      <InArgument x:TypeArguments="x:Int32" />
+                    </ui:Target.TimeoutMS>
+                    <ui:Target.WaitForReady>
+                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                    </ui:Target.WaitForReady>
+                  </ui:Target>
+                </ui:TakeScreenshot.Target>
+              </ui:TakeScreenshot>
+              <ui:SaveImage DisplayName="Save Business Exception Image" FileName="[in_Config(&quot;ExceptionScreenshotFilePath&quot;).ToString+Now.ToString(&quot;MMddyyyy_hhmmss&quot;)+&quot;.png&quot;]" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="SaveImage_2" Image="[ExceptionScreenshot]" />
+              <ui:CloseTab Browser="[io_ChromeBrowser]" DisplayName="Close Tab" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="CloseTab_3" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
