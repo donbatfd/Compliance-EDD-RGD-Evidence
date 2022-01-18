@@ -11,7 +11,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1289,3440</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1289,3450</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>LinkedInLookup_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -81,20 +81,15 @@
       <AssemblyReference>WebAppLogin_Expressions_294043</AssemblyReference>
       <AssemblyReference>WebAppLogin</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="LinkedInLookup" sap:VirtualizedContainerService.HintSize="1299,3375" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="LinkedInLookup" sap:VirtualizedContainerService.HintSize="1299,3385" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_ProfileSummaries" />
       <Variable x:TypeArguments="x:String" Name="str_LinkedInLocation" />
       <Variable x:TypeArguments="x:Int32" Name="int_SearchResultCount" />
       <Variable x:TypeArguments="x:Int32" Name="int_ResultsPagesCount" />
-      <Variable x:TypeArguments="x:String" Name="str_ResultsPagesURL">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:String">https://www.linkedin.com/search/results/people/?firstName=Donald&amp;lastName=Biehl&amp;origin=SEO_PSERP</Literal>
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:String" Default="https://www.linkedin.com/search/results/people/?firstName=Donald&amp;lastName=Biehl&amp;origin=SEO_PSERP" Name="str_ResultsPagesURL" />
       <Variable x:TypeArguments="x:Int32" Name="int_ResultsPagesCounter" />
       <Variable x:TypeArguments="s:String[]" Name="str_PageURLSplits" />
       <Variable x:TypeArguments="x:String" Name="str_SearchNameURL" />
@@ -170,13 +165,13 @@
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
-    <ui:BrowserScope SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Browser="[io_ChromeBrowser]" BrowserType="Chrome" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="1257,2526" sap2010:WorkflowViewState.IdRef="BrowserScope_2" UiBrowser="[io_ChromeBrowser]">
+    <ui:BrowserScope SearchScope="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Browser="[io_ChromeBrowser]" BrowserType="Chrome" DisplayName="Attach Browser" sap:VirtualizedContainerService.HintSize="1257,2536" sap2010:WorkflowViewState.IdRef="BrowserScope_2" UiBrowser="[io_ChromeBrowser]">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Identify customer LinkedIn profile" sap:VirtualizedContainerService.HintSize="1223,2418" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Identify customer LinkedIn profile" sap:VirtualizedContainerService.HintSize="1223,2428" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="dt_LinkedInResults" />
               <Variable x:TypeArguments="x:Int32" Name="int_ProfileLocationCount" />
@@ -203,7 +198,7 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get header text to determine if results found" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_2">
                     <ui:GetValue.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6f1b9236-3ee4-4b32-abd0-010a24cf8dc3" InformativeScreenshot="6cdd07a51e2db43a09c93856bfc92f73" Selector="&lt;html app='chrome.exe' url='*linkedin*' /&gt;&lt;webctrl aaname='*results*' parentid='main' tag='DIV' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6f1b9236-3ee4-4b32-abd0-010a24cf8dc3" InformativeScreenshot="6cdd07a51e2db43a09c93856bfc92f73" Selector="&lt;html app='chrome.exe' url='*linkedin*' /&gt;&lt;webctrl aaname='*result*' parentid='main' tag='DIV' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
                     </ui:GetValue.Target>
                     <ui:GetValue.Value>
                       <OutArgument x:TypeArguments="x:String">[str_SearchResultHeader]</OutArgument>
@@ -253,7 +248,7 @@
             </TryCatch>
             <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1181,61" sap2010:WorkflowViewState.IdRef="WriteLine_8" Text="[str_SearchResultHeader]" />
             <ui:BuildDataTable DataTable="[dt_ProfileSummaries]" DisplayName="Build Data Table of LinkedIn profile summaries" sap:VirtualizedContainerService.HintSize="1181,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ProfileSummary&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;200&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ProfileURL&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-            <If Condition="[str_SearchResultHeader.Contains(&quot;No results found&quot;)]" DisplayName="Determine if results were found" sap:VirtualizedContainerService.HintSize="1181,1461" sap2010:WorkflowViewState.IdRef="If_5">
+            <If Condition="[str_SearchResultHeader.Contains(&quot;No results found&quot;)]" DisplayName="Determine if results were found" sap:VirtualizedContainerService.HintSize="1181,1471" sap2010:WorkflowViewState.IdRef="If_5">
               <If.Then>
                 <Sequence DisplayName="Process no results" sap:VirtualizedContainerService.HintSize="418,831" sap2010:WorkflowViewState.IdRef="Sequence_9">
                   <sap:WorkflowViewStateService.ViewState>
@@ -337,15 +332,12 @@
                       <Flowchart.StartNode>
                         <x:Reference>__ReferenceID0</x:Reference>
                       </Flowchart.StartNode>
-                      <FlowDecision x:Name="__ReferenceID0" DisplayName="Current &lt;= Total?" sap:VirtualizedContainerService.HintSize="98,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
-                        <FlowDecision.Condition>
-                          <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="int_ResultsPagesCounter&lt;=int_ResultsPagesCount" />
-                        </FlowDecision.Condition>
+                      <FlowDecision x:Name="__ReferenceID0" Condition="[int_ResultsPagesCounter&lt;=int_ResultsPagesCount]" DisplayName="Current &lt;= Total?" sap:VirtualizedContainerService.HintSize="99,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             <av:Point x:Key="ShapeLocation">245,116.5</av:Point>
-                            <av:Size x:Key="ShapeSize">98,87</av:Size>
+                            <av:Size x:Key="ShapeSize">99,87</av:Size>
                             <av:PointCollection x:Key="TrueConnector">245,160 216,160 216,97 283,97 283,50 271,50</av:PointCollection>
                             <av:PointCollection x:Key="FalseConnector">343,160 373,160 373,170 400,170</av:PointCollection>
                           </scg:Dictionary>
@@ -381,7 +373,7 @@
                                     <av:PointCollection x:Key="ConnectorLocation">100,175.02 100,244.5</av:PointCollection>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:BuildDataTable DataTable="[dt_LinkedInResults]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ProfileName&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ProfileURL&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ProfileLocation&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ProfileProfession&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;">
+                                <ui:BuildDataTable DataTable="[dt_LinkedInResults]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ProfileName&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ProfileURL&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;ProfileLocation&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;ProfileProfession&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
